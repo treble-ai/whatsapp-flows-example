@@ -1,4 +1,5 @@
 .venv
 .vscode
-.private.pem
-.public.pem
+private.pem
+public.pem
+**/__pycache__/**
