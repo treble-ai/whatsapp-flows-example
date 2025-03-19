@@ -1,0 +1,93 @@
+{
+  "version": "7.0",
+  "data_api_version": "3.0",
+  "routing_model": {
+    "USER_INFO": []
+  },
+  "screens": [
+    {
+      "id": "USER_INFO",
+      "title": "Conoce más de Treble",
+      "terminal": true,
+      "data": {
+        "name": {
+          "type": "string",
+          "__example__": "Ana"
+        },
+        "email": {
+          "type": "string",
+          "__example__": "ana@treble.ai"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          },
+          "__example__": [
+            { "id": "ai-node", "title": "🤖 AI Node", "enabled": true },
+            { "id": "meta-ads", "title": "📧 Meta Ads", "enabled": false }
+          ]
+        }
+      },
+      "layout": {
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "TextHeading",
+            "text": "Déjanos tu información"
+          },
+          {
+            "type": "Form",
+            "name": "text_input_form",
+            "init-values": "${data.init_values}",
+            "children": [
+              {
+                "type": "TextInput",
+                "required": true,
+                "label": "Nombre y apellido",
+                "name": "name"
+              },
+              {
+                "type": "TextInput",
+                "required": true,
+                "input-type": "email",
+                "label": "Correo electrónico",
+                "name": "email"
+              },
+              {
+                "type": "ChipsSelector",
+                "name": "features",
+                "label": "Features",
+                "description": "Selecciona sobre cuáles features quisieras recibir más información",
+                "data-source": "${data.features}"
+              },
+              {
+                "type": "Footer",
+                "label": "Continuar",
+                "on-click-action": {
+                  "name": "data_exchange",
+                  "payload": {
+                    "name": "${form.name}",
+                    "email": "${form.email}",
+                    "features": "${form.features}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
